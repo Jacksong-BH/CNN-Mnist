@@ -148,26 +148,6 @@ init = tf.global_variables_initializer()
 saver = tf.train.Saver()
 
 
-# In[29]:
-
-
-with tf.Session() as sess:
-    sess.run(init)
-    for epoch in range(epochs):
-        for batch in range(mnist.train.num_examples//batch_size):
-            batch_x, batch_y = mnist.train.next_batch(batch_size)
-            _,loss = sess.run([optimizer,cost], feed_dict = {x: batch_x, y_: batch_y, keep_prob: 0.4})
-            
-            validate_batch_x, validate_batch_y = mnist.validation.next_batch(validate_size)
-            validation_accuracy = sess.run(accuracy, feed_dict = {x: validate_batch_x, y_: validate_batch_y, keep_prob: 1.})
-            print('Epoch {:>2}, Batch {:>3} -'
-                 'Loss: {:.4f}, Validation accuracy: {:.6f}'.format(epoch+1, batch+1, loss, validation_accuracy))
-    
-    #Test accuracy
-    test_acc = sess.run(accuracy, feed_dict = {x: mnist.test.images[:3000], y_: mnist.test.labels[:3000], keep_prob: 1.})
-    print('Testing data accuracy: {}'.format(test_acc))
-
-
 # In[13]:
 
 
